@@ -28,9 +28,37 @@ function thsp_get_theme_customizer_fields() {
 		'colors' => array(
 			'existing_section' => true,
 			'fields' => array(
+				'new_color_field' => array(
+				
+					// Setting related
+					'setting_args' => array(
+						'default' => '#eee',
+						'type' => 'option',
+						'capability' => 'edit_theme_options',
+						'theme_supports' => 'post-thumbnails',
+						'transport' => 'refresh',
+						// 'sanitize_callback' => 'sanitize_cb',
+						// 'sanitize_js_callback' => 'sanitize_js_cb',
+						// 'sanitization' => 'nohtml'
+					),
+					
+					// Control related
+					'control_args' => array(
+						'label' => __( 'New color field label', 'my_theme_textdomain' ),
+						'type' => 'radio',
+						'choices' => array(
+							'#fff' => __( 'White', 'my_theme_textdomain' ),
+							'#eee' => __( 'Light gray', 'my_theme_textdomain' ),
+							'#000' => __( 'Black', 'my_theme_textdomain' )
+						),					
+						'priority' => 10
+					)
+					
+				)
 			)
 		),
 		
+		/*
 		'new_section' => array(
 			'existing_section' => false,
 			'args' => array(
@@ -41,6 +69,7 @@ function thsp_get_theme_customizer_fields() {
 			'fields' => array(
 			)
 		)
+		*/
 
 	);
 	
