@@ -1,29 +1,40 @@
 <?php
+
 /**
- * Theme Customizer
+ * Theme Customizer Boilerplate
  *
- * @package		TS_Theme_Settings
+ * @package		Theme_Customizer_Boilerplate
  * @copyright	Copyright (c) 2012, Slobodan Manic
  * @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License, v2 (or newer)
  * @author		Slobodan Manic
  *
- * @since		TS_Theme_Settings 1.0
+ * @since		Theme_Customizer_Boilerplate 1.0
  */
+
+
+/**
+ * Arrays of option fields and tabs
+ */	
+require( get_stylesheet_directory() . '/customizer/get-options.php' );
+
+/**
+ * Helper functions
+ */	
+require( get_stylesheet_directory() . '/customizer/helpers.php' );
 
 
 /**
  * Adds Customizer Sections, Settings and Controls
  *
- * - Customizer Textarea Control (Custom)
- * - Customizer Number Control (Custom)
+ * - Require Custom Customizer Controls
  * - Add Customizer Sections
  * - Add Customizer Controls
  *  -- Add Textarea Control
  *  -- Add Number Control
  *
- * @uses	thsp_get_theme_options_sections()	Defined in helpers.php
+ * @uses	thsp_get_theme_customizer_sections()	Defined in helpers.php
  * @uses	thsp_settings_page_capability()		Defined in helpers.php
- * @uses	thsp_get_theme_options_fields()		Defined in get-options.php
+ * @uses	thsp_get_theme_customizer_fields()		Defined in get-options.php
  *
  * @link	$wp_customize->add_section			http://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_section
  * @link	$wp_customize->add_setting			http://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
@@ -33,44 +44,15 @@ add_action( 'customize_register', 'thsp_customize_register' );
 function thsp_customize_register( $wp_customize ) {
 
 	/**
-	 * Creates Customizer control for textarea field
-	 *
-	 * @link	http://ottopress.com/2012/making-a-custom-control-for-the-theme-customizer/
-	 * @since	TS_Theme_Settings 1.0
-	 */
-	class Customizer_Textarea_Control extends WP_Customize_Control {
-		public $type = 'textarea';
-		
-		public function render_content() {
-		?>
-			<label>
-				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-				<textarea rows="5" style="width:100%;" <?php $this->link(); ?>><?php echo esc_textarea( $this->value() ); ?></textarea>
-			</label>
-		<?php
-		}
-	}
+	 * Create custom controls
+	 */	
+	require( get_stylesheet_directory() . '/customizer/extend.php' );
 
-	/**
-	 * Creates Customizer control for input[type=number] field
-	 */
-	class Customizer_Number_Control extends WP_Customize_Control {
-		public $type = 'number';
-		
-		public function render_content() {
-		?>
-			<label>
-				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-				<input type="number" <?php $this->link(); ?> value="<?php echo intval( $this->value() ); ?>" />
-			</label>
-		<?php
-		}
-	}
 
 	/**
 	 * Adds Customizer sections
 	 */
-	$thsp_sections = thsp_get_theme_options_sections();
+	$thsp_sections = thsp_get_theme_customizer_sections();
 	foreach( $thsp_sections as $thsp_section ) {
 		$wp_customize->add_section(
 			$thsp_section['name'],
@@ -81,7 +63,7 @@ function thsp_customize_register( $wp_customize ) {
 		);
 	}
 	
-	$thsp_options = thsp_get_theme_options_fields();
+	$thsp_options = thsp_get_theme_customizer_fields();
 	foreach( $thsp_options as $thsp_option_key => $thsp_option_value ) {
 
 		// Make sure option should not be hidden in customizer
