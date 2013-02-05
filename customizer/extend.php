@@ -1,5 +1,16 @@
 <?php
 
+
+/**
+ * Theme Customizer sanitization callback function
+ */
+function thsp_sanitize_cb( $input ) {
+	
+	return wp_kses_post( $input );
+	
+}
+
+
 /**
  * Creates Customizer control for textarea field
  *

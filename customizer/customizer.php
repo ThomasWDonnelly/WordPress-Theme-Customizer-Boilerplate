@@ -13,9 +13,9 @@
 
 
 /**
- * Arrays of option fields and tabs
+ * Arrays of options
  */	
-require( get_stylesheet_directory() . '/customizer/get-options.php' );
+require( get_stylesheet_directory() . '/customizer/options.php' );
 
 /**
  * Helper functions
@@ -28,9 +28,8 @@ require( get_stylesheet_directory() . '/customizer/helpers.php' );
  *
  * - Require Custom Customizer Controls
  * - Add Customizer Sections
- * - Add Customizer Controls
- *  -- Add Textarea Control
- *  -- Add Number Control
+ *   -- Add Customizer Settings
+ *   -- Add Customizer Controls
  *
  * @uses	thsp_get_theme_customizer_sections()	Defined in helpers.php
  * @uses	thsp_settings_page_capability()			Defined in helpers.php
@@ -40,40 +39,42 @@ require( get_stylesheet_directory() . '/customizer/helpers.php' );
  * @link	$wp_customize->add_setting				http://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
  * @link	$wp_customize->add_control				http://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
  */
-add_action( 'customize_register', 'thsp_customize_register' );
 function thsp_customize_register( $wp_customize ) {
-
+print_r( thsp_get_theme_options() );
 	/**
 	 * Create custom controls
 	 */	
 	require( get_stylesheet_directory() . '/customizer/extend.php' );
 
-	/**
-	 * Adds Customizer sections
+	/*
+	 * Get all the fields using a helper function
 	 */
 	$thsp_sections = thsp_get_theme_customizer_fields();
+
+	/**
+	 * Loop through the array and add Customizer sections
+	 */
 	foreach( $thsp_sections as $thsp_section_key => $thsp_section_value ) {
 		
 		/**
 		 * Adds Customizer section, if needed
 		 */
-		if( ! isset( $thsp_section_value['existing_section'] ) ) {
+		if( ! $thsp_section_value['existing_section'] ) {
 			
 			$thsp_section_args = $thsp_section_value['args'];
 			
 			// Add section
 			$wp_customize->add_section(
 				$thsp_section_key,
-				array(
-					'title'			=> $thsp_section_args['title'],
-					'description'	=> $thsp_section_args['description'],
-					'priority'		=> $thsp_section_args['priority']
-				)
+				$thsp_section_args
 			);
 			
 		} // end if
 		
-		// Add settings and controls
+		/*
+		 * Loop through 'fields' array in each section
+		 * and add settings and controls
+		 */
 		$thsp_section_fields = $thsp_section_value['fields'];
 		foreach( $thsp_section_fields as $thsp_field_key => $thsp_field_value ) {
 
@@ -81,19 +82,19 @@ function thsp_customize_register( $wp_customize ) {
 			 * Adds Customizer settings
 			 */
 			$wp_customize->add_setting(
-				"thsp_theme_options[$thsp_field_key]",
+				"my_theme_options[$thsp_field_key]",
 				$thsp_field_value['setting_args']
 			);
 
 			/**
 			 * Adds Customizer control
 			 *
-			 * First need to add 'section value to it, so it doesn't need to
-			 * be repeated in options array for each field
+			 * 'section' value must be added to 'control_args' array
+			 * so control can get added to current section
 			 */
 			$thsp_field_value['control_args']['section'] = $thsp_section_key;
 			$wp_customize->add_control(
-				"thsp_theme_options[$thsp_field_key]",
+				"my_theme_options[$thsp_field_key]",
 				$thsp_field_value['control_args']
 			);
 				
@@ -102,3 +103,4 @@ function thsp_customize_register( $wp_customize ) {
 	}
 
 }
+add_action( 'customize_register', 'thsp_customize_register' );
