@@ -7,4 +7,6 @@ Copy entire /customizer directory into your theme's directory and include custom
 
 require( get_stylesheet_directory() . '/customizer/customizer.php' );
 
+Then you can change contents of $options array in options.php file and use whatever fields you need.
+
 @slobodanmanic
