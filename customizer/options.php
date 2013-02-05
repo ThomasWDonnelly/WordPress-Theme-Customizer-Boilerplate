@@ -1,11 +1,7 @@
 <?php
 
 /**
- * Get Theme Options
- *
- * - Theme Options Fields
- * - Theme Options Values
- * - Theme Options Defaults
+ * Get Theme Customizer Fields
  *
  * @package		Theme_Customizer_Boilerplate
  * @copyright	Copyright (c) 2013, Slobodan Manic
