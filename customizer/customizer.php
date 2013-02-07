@@ -58,7 +58,7 @@ require( get_stylesheet_directory() . '/customizer/helpers.php' );
  * @link	$wp_customize->add_control				http://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
  */
 function thsp_customize_register( $wp_customize ) {
-print_r( thsp_get_theme_options() );
+
 	/**
 	 * Create custom controls
 	 */	
