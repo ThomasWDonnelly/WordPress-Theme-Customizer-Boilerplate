@@ -5,9 +5,22 @@
  *
  * @return	string	The capability to actually use
  */
-function thsp_settings_page_capability() {
+function thsp_cbp_capability() {
 
-	return apply_filters( 'thsp_settings_page_capability_filter', 'edit_theme_options' );
+	return apply_filters( 'thsp_cbp_capability', 'edit_theme_options' );
+
+}
+
+
+/**
+ * Name of DB entry under which options are stored if 'type' => 'option'
+ * is used for Theme Customizer settings
+ *
+ * @return	string	DB entry
+ */
+function thsp_cbp_option() {
+
+	return apply_filters( 'thsp_cbp_option', 'thsp_cbp_theme_options' );
 
 }
 
@@ -22,13 +35,13 @@ function thsp_settings_page_capability() {
  * @return	array									Current values for all options
  * @since	Theme_Customizer_Boilerplate 1.0
  */
-function thsp_get_theme_options() {
+function thsp_cbp_get_options_values() {
 
 	// Get the option defaults
-	$option_defaults = thsp_get_theme_options_defaults();
+	$option_defaults = thsp_cbp_get_options_defaults();
 	
 	// Parse the stored options with the defaults
-	$thsp_cazuela_options = wp_parse_args( get_option( 'my_theme_options', array() ), $option_defaults );
+	$thsp_cazuela_options = wp_parse_args( get_option( thsp_cbp_option(), array() ), $option_defaults );
 	
 	// Return the parsed array
 	return $thsp_cazuela_options;
@@ -45,10 +58,10 @@ function thsp_get_theme_options() {
  * @return	array	$thsp_option_defaults		Default values for all options
  * @since	Theme_Customizer_Boilerplate 1.0
  */
-function thsp_get_theme_options_defaults() {
+function thsp_cbp_get_options_defaults() {
 
 	// Get the array that holds all theme option fields
-	$thsp_sections = thsp_get_theme_customizer_fields();
+	$thsp_sections = thsp_cbp_get_fields();
 	
 	// Initialize the array to hold the default values for all theme options
 	$thsp_option_defaults = array();
