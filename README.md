@@ -14,5 +14,5 @@ If you'd like to place Customizer Boilerplate in another folder inside your them
 @slobodanmanic
 
   [1]: http://www.wpexplorer.com/theme-customizer-boilerplate/
-  [2]: customizer-boilerplate/options.php
-  [3]: customizer-boilerplate/helpers.php#L28
+  [2]: customizer-boilerplate/options.php#L28
+  [3]: customizer-boilerplate/helpers.php#L9
