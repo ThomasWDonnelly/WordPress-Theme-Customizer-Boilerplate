@@ -11,8 +11,9 @@ Then you can change contents of '$options' array in ['options.php'][2] file by u
 
 If you'd like to place Customizer Boilerplate in another folder inside your theme folder (e.g. /inc/customizer-boilerplate) make sure you hook into 'thsp_cbp_directory_uri' filter hook and change default customizer path (see 'thsp_cbp_directory_uri' function in ['helpers.php'][3]).
 
-@slobodanmanic
+[@slobodanmanic][4]
 
   [1]: http://www.wpexplorer.com/theme-customizer-boilerplate/
   [2]: customizer-boilerplate/options.php#L28
   [3]: customizer-boilerplate/helpers.php#L9
+  [4]: http://twitter.com/slobodanmanic
