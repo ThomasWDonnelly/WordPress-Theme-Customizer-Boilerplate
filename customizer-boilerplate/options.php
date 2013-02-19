@@ -237,7 +237,7 @@ function thsp_cbp_get_fields() {
 				 * ============
 				 * ============
 				 */
-				'new_textarea_field' => array(
+				'new_number_field' => array(
 					'setting_args' => array(
 						'default' => '',
 						'type' => 'option',
