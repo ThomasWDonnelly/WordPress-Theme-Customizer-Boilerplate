@@ -251,7 +251,39 @@ function thsp_cbp_get_fields() {
 					)
 				),
 
-			)
+				/*
+				 * ========================
+				 * ========================
+				 * Image replacement radios
+				 * ========================
+				 * ========================
+				 */
+				'new_images_radio_field' => array(
+					'setting_args' => array(
+						'default' => 'option_1',
+						'type' => 'option',
+						'capability' => $thsp_cbp_capability,
+						'transport' => 'refresh',
+					), // End setting args			
+					'control_args' => array(
+						'label' => __( 'Layout type', 'my_theme_textdomain' ),
+						'type' => 'images_radio', // Image radio replacement
+						'choices' => array(
+							'option_1' => array(
+								'label' => __( 'Option 1', 'my_theme_textdomain' ),
+								// Define source for each image
+								'image_src' => get_template_directory_uri() . '/images/theme-options/option-1.png'
+							),
+							'option_2' => array(
+								'label' => __( 'Option 2', 'my_theme_textdomain' ),
+								'image_src' => get_template_directory_uri() . '/images/theme-options/option-2.png'
+							)
+						),					
+						'priority' => 9
+					) // End control args
+				),
+
+			),
 			
 		),
 
