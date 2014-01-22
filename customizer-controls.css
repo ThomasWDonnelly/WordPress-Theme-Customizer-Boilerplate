@@ -1,9 +1,5 @@
 .image-radio {
-	opacity: 0;
-	width: 0;
-	height: 0;
-	display: block;
-	float: left;
+	display: none !important;
 }
 .image-radio + label {
 	display: block;
